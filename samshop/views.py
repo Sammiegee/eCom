@@ -9,3 +9,8 @@ def home(request):
 
 def index(request):
     return render(request, 'samshop/index.html')
+
+
+def login(request):
+    pass
+

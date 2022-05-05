@@ -52,25 +52,33 @@ class Command(BaseCommand):
             reader = csv.reader(file, delimiter=",")
             next(reader)
             for count, row in enumerate(reader):
-                item_name = row[1]
-                retail_price = row[11]
-                disc_price = row[12]
-                image1 = row[13]
-                image2 = row[14]
-                image3 = row[15]
-                image4 = row[16]
-                print(count+1)
-                print(row[2])
+                try:
+                    item_name = row[1]
+                    retail_price = row[11]
+                    disc_price = row[12]
+                    image1 = row[13]
+                    image2 = row[14]
+                    image3 = row[15]
+                    image4 = row[16]
+                    print(count+1)
+                    print(row[2])
+                    print(row[3])
 
-                product_details = ProductDetails.objects.create(
-                    item_name=item_name,
-                    retail_price=retail_price,
-                    disc_price=disc_price,
-                    main_category=MainCategory.objects.get(category=row[2]),
-                    sub_category=SubCategory.objects.get(sub_category=row[3]),
-                    image1=image1,
-                    image2=image2,
-                    image3=image3,
-                    image4=image4,
-                )
-                product_details.save()
+                    if retail_price == "":
+                        pass
+                    else:
+
+                        product_details = ProductDetails.objects.create(
+                            item_name=item_name,
+                            retail_price=retail_price,
+                            disc_price=disc_price,
+                            main_category=MainCategory.objects.get(category=row[2]),
+                            sub_category=SubCategory.objects.get(sub_category=row[3]),
+                            image1=image1,
+                            image2=image2,
+                            image3=image3,
+                            image4=image4,
+                        )
+                        product_details.save()
+                except ValueError:
+                    pass
