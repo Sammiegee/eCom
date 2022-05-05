@@ -19,5 +19,5 @@ def index(request):
 
 
 def login(request):
-    pass
+    return render(request, 'samshop/login.html')
 
