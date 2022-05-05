@@ -19,5 +19,5 @@ def index(request):
 
 
 def login(request):
-    return render(request, 'samshop/login.html')
+    return render(request, 'registration/login.html')
 
