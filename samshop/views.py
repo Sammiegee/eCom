@@ -9,6 +9,10 @@ def home(request):
     return render(request, 'samshop/base.html')
 
 
+def login(request):
+    return render(request, 'registration/login.html')
+
+
 def index(request):
     # if request.method == "POST":
     #     station = request.POST.get('station_name')
@@ -23,6 +27,25 @@ def index(request):
     return render(request, 'samshop/index.html', {'page_obj': page_obj})
 
 
-def login(request):
-    return render(request, 'registration/login.html')
+def clothing(request):
+    return render(request, 'samshop/clothing.html')
+
+
+def footwear(request):
+    return render(request, 'samshop/footwear.html')
+
+
+def jewellery(request):
+    return render(request, 'samshop/jewellery.html')
+
+
+def watches(request):
+    return render(request, 'samshop/watches.html')
+
+
+def bags(request):
+    return render(request, 'samshop/bags.html')
+
+
+
 
