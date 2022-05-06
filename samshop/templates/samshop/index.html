@@ -2,46 +2,53 @@
 
 {% block content %}
 <div>
-  {% for row in page_obj %}
-  <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-    <div class="card product-item border-0 mb-4">
-      <div class="card-header product-img position-relative overflow-hidden bg-transparent">
-        <img class="img-fluid w-100" src="{{row.image1}}" alt="">
+  <div>
+    <div class="row align-items-start pt-10">
+      <div class="col ms-10">
+        <form>
+          <input type="checkbox" class="ms-3"><label class="ms-2">Test</label>
+        </form>
       </div>
-      <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-        <h5 class="text-truncate mb-3">{{row.item_name}}</h5>
-        <div class="d-flex justify-content-center">
-          <h6>£{{row.disc_price}}</h6>
-          {% if row.disc_price < row.retail_price %}
-          <h6 class="text-muted ms-2"><del>£{{row.retail_price}}</del></h6>
-          {% endif %}
+      {% for row in page_obj %}
+      <div class="col col-lg-3 d-flex col-sm-6 col-sm-12 pb-1">
+        <div class="card product-item border-0 mb-2">
+          <div class="card-header border position-relative overflow-hidden bg-transparent" style="width: 400px; height: 200px;">
+            <img class="w-50" src="{{row.image1}}" alt="">
+          </div>
+          <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+            <h5 class="text-truncate mb-2">{{row.item_name}}</h5>
+            <div class="d-flex justify-content-center">
+              <h6>£{{row.disc_price}}</h6>
+              {% if row.disc_price < row.retail_price %}
+              <h6 class="text-muted ms-2"><del>£{{row.retail_price}}</del></h6>
+              {% endif %}
+            </div>
+          </div>
+
         </div>
       </div>
-
+      {% endfor %}
     </div>
 
-  </div>
-  {% endfor %}
+    <div class="pagination justify-content-center pb-0">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; First page </a>
+        <span>|</span>
+        <a href="?page={{ page_obj.previous_page_number }}"> Previous page </a>
+        {% endif %}
 
-  <div class="pagination">
-    <span class="step-links">
-      {% if page_obj.has_previous %}
-      <a href="?page=1">&laquo; First page</a>
-      <span>|</span>
-      <a href="?page={{ page_obj.previous_page_number }}">Previous page</a>
-      {% endif %}
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
 
-      <span class="current">
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next page</a>
+        <span>|</span>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
+        {% endif %}
       </span>
-
-      {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">Next page</a>
-      <span>|</span>
-      <a href="?page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
-      {% endif %}
-    </span>
+    </div>
   </div>
-
 </div>
 {% endblock %}
