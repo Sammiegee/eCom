@@ -1,19 +1,32 @@
 import csv
+import random
+import decimal
+from faker import Faker
 from pathlib import Path
+from datetime import datetime
 from django.db import IntegrityError
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
-from samshop.models import MainCategory, SubCategory, ProductDetails
+from samshop.models import MainCategory, SubCategory, ProductDetails, Basket, Order, LineItem, Customer
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
 
         # drop all tables to avoid duplicates
+
+        Basket.objects.all().delete()
+        LineItem.objects.all().delete()
+        Order.objects.all().delete()
         MainCategory.objects.all().delete()
         SubCategory.objects.all().delete()
         ProductDetails.objects.all().delete()
-
+        Customer.objects.all().delete()
+        User.objects.all().delete()
         print("Table dropped successfully")
+
+        fake = Faker()
+
         base_dir = Path(__file__).resolve().parent.parent.parent.parent
 
         with open(f'{base_dir}/samshop/data/flipkart_category.csv', 'r') as file:
