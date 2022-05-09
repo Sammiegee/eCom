@@ -3,15 +3,17 @@
 {% block content %}
 <div>
     <div>
-        <div class="mt-3">
-            <span>Search Results</span>
+        <div class="mt-3 d-flex justify-content-center">
+            {% if not page_obj%}
+            <span class="fs-3 fw-bold">Sorry, no results found.</span>
+            {% else %}
+            <span class="fs-2">Search Results. . .</span>
+            {% endif %}
         </div>
 
         <div class="container d-flex justify-content-between mt-5">
-      <div class="col-lg-2">
-        <form>
-          <input type="checkbox" class="ms-3"><label class="ms-2">Test</label>
-        </form>
+      <div class="col-lg-1">
+
       </div>
 
       <div class="col-lg-9  d-flex justify-content-evenly flex-wrap col-md-6 col-sm-12 pb-1">
