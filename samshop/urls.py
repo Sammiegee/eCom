@@ -10,4 +10,5 @@ urlpatterns = [
     path('clothing', views.clothing, name='clothing'),
     path('footwear', views.footwear, name='footwear'),
     path('admin', admin.site.urls),
+    path('search', views.search, name='search'),
 ]

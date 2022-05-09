@@ -1,6 +1,8 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from samshop.models import MainCategory, SubCategory, ProductDetails
+
 
 # Create your views here.
 
@@ -14,17 +16,26 @@ def login(request):
 
 
 def index(request):
-    # if request.method == "POST":
-    #     station = request.POST.get('station_name')
-    #     request.session['station_name'] = station
-
-    data = ProductDetails.objects.filter(main_category=237)
+    data = ProductDetails.objects.all()
 
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    # return render(request, 'samshop/index.html')
+
     return render(request, 'samshop/index.html', {'page_obj': page_obj})
+
+
+def search(request):
+    if request.method == "POST":
+        query = request.POST.get('query')
+        data = ProductDetails.objects.filter(
+            Q(item_name__icontains=query) | Q(main_category__category__icontains=query)
+            | Q(sub_category__sub_category__icontains=query)
+        )
+        paginator = Paginator(data, 51)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    return render(request, 'samshop/search.html', {'page_obj': page_obj})
 
 
 def clothing(request):
