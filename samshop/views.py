@@ -20,7 +20,7 @@ def index(request):
 
     data = ProductDetails.objects.filter(main_category=237)
 
-    paginator = Paginator(data, 50)
+    paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     # return render(request, 'samshop/index.html')
@@ -28,11 +28,23 @@ def index(request):
 
 
 def clothing(request):
-    return render(request, 'samshop/clothing.html')
+    data = ProductDetails.objects.filter(main_category=237)
+
+    paginator = Paginator(data, 51)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'samshop/clothing.html', {'page_obj': page_obj})
 
 
 def footwear(request):
-    return render(request, 'samshop/footwear.html')
+    data = ProductDetails.objects.filter(main_category=238)
+
+    paginator = Paginator(data, 51)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'samshop/footwear.html', {'page_obj': page_obj})
 
 
 def jewellery(request):

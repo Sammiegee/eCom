@@ -3,31 +3,36 @@
 {% block content %}
 <div>
   <div>
-    <div class="row align-items-start pt-10">
-      <div class="col ms-10">
+    <div class="container d-flex justify-content-between mt-5">
+      <div class="col-lg-2">
         <form>
           <input type="checkbox" class="ms-3"><label class="ms-2">Test</label>
         </form>
       </div>
-      {% for row in page_obj %}
-      <div class="col col-lg-3 d-flex col-sm-6 col-sm-12 pb-1">
-        <div class="card product-item border-0 mb-2">
-          <div class="card-header border position-relative overflow-hidden bg-transparent" style="width: 400px; height: 200px;">
-            <img class="w-50" src="{{row.image1}}" alt="">
+
+      <div class="col-lg-9  d-flex justify-content-evenly flex-wrap col-md-6 col-sm-12 pb-1">
+        {% for row in page_obj %}
+        <div class="card product-item border-0 mb-2 border"  style="width: 33%; height: 400px;">
+          <div class="card-header border position-relative overflow-hidden bg-transparent">
+            <img class="w-50 img-fluid ms-5" src="{{row.image1}}" alt="">
           </div>
-          <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-            <h5 class="text-truncate mb-2">{{row.item_name}}</h5>
+          <div class="card-body border-left border-right text-center p-0 pt-4 pb-3 d-flex flex-column align-items-center">
+            <a href="" class="text-decoration-none"><h5 class=" mb-2">{{row.item_name}}</h5></a>
             <div class="d-flex justify-content-center">
               <h6>£{{row.disc_price}}</h6>
               {% if row.disc_price < row.retail_price %}
               <h6 class="text-muted ms-2"><del>£{{row.retail_price}}</del></h6>
               {% endif %}
+              <form method="post" action="" class="ms-3">
+                <input type="checkbox" name="" id="" onchange="submit"><label class="ms-2">Add to Basket</label>
+              </form>
             </div>
           </div>
 
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+
     </div>
 
     <div class="pagination justify-content-center pb-0">
