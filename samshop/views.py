@@ -1,6 +1,6 @@
 from django.db.models import Q
 from samshop.forms import SignUpForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib.auth import login, authenticate
 from samshop.models import MainCategory, SubCategory, ProductDetails
@@ -11,7 +11,6 @@ from samshop.models import MainCategory, SubCategory, ProductDetails
 
 def home(request):
     return render(request, 'samshop/base.html')
-
 
 
 def signup(request):
@@ -31,7 +30,6 @@ def signup(request):
         login(request, user)
         return redirect('/')
     return render(request, 'samshop/signup.html', {'form': form})
-
 
 
 def index(request):
@@ -59,7 +57,6 @@ def search(request):
             return render(request, 'samshop/search.html', {'page_obj': page_obj})
 
     return redirect('samshop:index')
-
 
 
 def clothing(request):

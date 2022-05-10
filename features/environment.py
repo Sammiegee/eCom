@@ -1,3 +1,5 @@
+# Reference https://github.com/scharlau/shopping_exercise_django
+
 from behave import fixture, use_fixture
 import os, urllib
 import django
@@ -14,9 +16,9 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "eCommerce.settings"
 django.setup()
 
 # Use the chrome driver specific to your version of Chrome browser and put it in ./driver directory
-# CHROME_DRIVER = os.path.join(os.path.join(os.path.dirname(__file__), 'driver'), 'chromedriver')
+CHROME_DRIVER = os.path.join(os.path.join(os.path.dirname(__file__), 'driver'), 'chromedriver')
 
-CHROME_DRIVER = os.path.join('driver/chromedriver')
+# CHROME_DRIVER = os.path.join('/features/driver/chromedriver')
 chrome_options = Options()
 # comment out the line below if you want to see the browser launch for tests
 # possibly add time.sleep() if required
@@ -24,6 +26,7 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument('--no-proxy-server')
 chrome_options.add_argument("--proxy-server='direct://'")
 chrome_options.add_argument("--proxy-bypass-list=*")
+chrome_options.add_argument('window-size=1920x1480')
 
 
 def before_all(context):

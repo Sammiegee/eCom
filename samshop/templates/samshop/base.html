@@ -19,13 +19,14 @@
                 <form class="d-flex" method="post" action="{% url 'samshop:search' %}">
                     {% csrf_token %}
                     <input class="form-control me-1 w-100" name="query" type="search" placeholder="Search" aria-label="Search" size="70">
-                    <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
+                    <button name="search_button" class="btn btn-sm btn-outline-success" type="submit">Search</button>
                 </form>
                 <div class=" d-flex justify-content-end align-items-center">
                     {% if user.is_authenticated %}
                     <div class="mt-3 me-3">
                         Hello, {{ user.username }}!
                     </div>
+                    <p class="mt-3 me-2"><a href="{% url 'logout' %}">Log Out</a></p>
                     {% else %}
                     <form action="{% url 'login' %}">
                         <button class="btn btn-secondary" type="submit">Log in</button>
@@ -52,19 +53,19 @@
                           <a class="nav-link active" aria-current="page" href="{% url 'samshop:index' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link active" href="{% url 'samshop:clothing' %}">Clothing</a>
+                          <a name="clothing" class="nav-link active" href="{% url 'samshop:clothing' %}">Clothing</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link active" href="{% url 'samshop:footwear' %}">Footwear</a>
+                          <a name="footwear" class="nav-link active" href="{% url 'samshop:footwear' %}">Footwear</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link active" href="{% url 'samshop:jewellery' %}">Jewellery</a>
+                          <a name="jewellery" class="nav-link active" href="{% url 'samshop:jewellery' %}">Jewellery</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link active" href="{% url 'samshop:watches' %}">Watches</a>
+                          <a name="watches" class="nav-link active" href="{% url 'samshop:watches' %}">Watches</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link active" href="{% url 'samshop:bags' %}">Bags, Wallets & Belts</a>
+                          <a name="bags" class="nav-link active" href="{% url 'samshop:bags' %}">Bags, Wallets & Belts</a>
                         </li>
 
                     </ul>

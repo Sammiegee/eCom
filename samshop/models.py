@@ -41,6 +41,7 @@ class Basket(models.Model):
 
 
 class Customer(models.Model):
+    # Reference https://github.com/scharlau/shopping_exercise_django
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, )
     address = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
@@ -62,6 +63,7 @@ class Customer(models.Model):
 
 
 class LineItem(models.Model):
+    # Reference https://github.com/scharlau/shopping_exercise_django
     quantity = models.IntegerField()
     product = models.ForeignKey('samshop.ProductDetails', on_delete=models.CASCADE)
     basket = models.ForeignKey('samshop.Basket', on_delete=models.CASCADE)
@@ -73,6 +75,7 @@ class LineItem(models.Model):
 
 
 class Order(models.Model):
+    # Reference https://github.com/scharlau/shopping_exercise_django
     customer = models.ForeignKey('samshop.Customer', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
