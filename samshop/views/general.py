@@ -19,8 +19,8 @@ from samshop.models import Basket, Customer, LineItem, Order, ProductDetails
 # Create your views here.
 
 
-def home(request):
-    return render(request, 'samshop/base.html')
+# def home(request):
+#     return render(request, 'samshop/base.html')
 
 
 def signup(request):
