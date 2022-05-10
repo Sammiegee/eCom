@@ -10,3 +10,6 @@ Designed a sketch mockup of the application frontend on paper
 Implemented the logic for the application in a step-wise manner. Solving problems and tackling 
 challenges on the way to making the application work. 
 Paginator was used to divide the data sent to the frontend pages into pages of 51 each per page. 
+The application includes authentication using a login form. 
+New users can register new accounts using the signup link on the login page.
+Behave was used to foster the Behavioural Driven Development procedure. 
