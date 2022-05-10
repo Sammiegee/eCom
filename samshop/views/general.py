@@ -75,8 +75,9 @@ def clothing(request):
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = BasketAddProductForm()
 
-    return render(request, 'samshop/clothing.html', {'page_obj': page_obj})
+    return render(request, 'samshop/clothing.html', {'page_obj': page_obj, 'form': form})
 
 
 def footwear(request):
@@ -85,8 +86,9 @@ def footwear(request):
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = BasketAddProductForm()
 
-    return render(request, 'samshop/footwear.html', {'page_obj': page_obj})
+    return render(request, 'samshop/footwear.html', {'page_obj': page_obj, 'form': form})
 
 
 def jewellery(request):
@@ -95,8 +97,9 @@ def jewellery(request):
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = BasketAddProductForm()
 
-    return render(request, 'samshop/jewellery.html', {'page_obj': page_obj})
+    return render(request, 'samshop/jewellery.html', {'page_obj': page_obj, 'form': form})
 
 
 def watches(request):
@@ -105,8 +108,9 @@ def watches(request):
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = BasketAddProductForm()
 
-    return render(request, 'samshop/watches.html', {'page_obj': page_obj})
+    return render(request, 'samshop/watches.html', {'page_obj': page_obj, 'form': form})
 
 
 def bags(request):
@@ -115,8 +119,9 @@ def bags(request):
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = BasketAddProductForm()
 
-    return render(request, 'samshop/bags.html', {'page_obj': page_obj})
+    return render(request, 'samshop/bags.html', {'page_obj': page_obj, 'form': form})
 
 
 

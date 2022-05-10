@@ -8,9 +8,7 @@
         </div>
         <div class="container d-flex justify-content-between mt-5">
       <div class="col-lg-2">
-        <form>
-          <input type="checkbox" class="ms-3"><label class="ms-2">Test</label>
-        </form>
+
       </div>
 
       <div class="col-lg-9  d-flex justify-content-evenly flex-wrap col-md-6 col-sm-12 pb-1">
@@ -26,8 +24,10 @@
               {% if row.disc_price < row.retail_price %}
               <h6 class="text-muted ms-2"><del>£{{row.retail_price}}</del></h6>
               {% endif %}
-              <form method="post" action="" class="ms-3">
-                <input type="checkbox" name="" id="" onchange="submit"><label class="ms-2">Add to Basket</label>
+              <form action="{% url 'samshop:basket_add' row.id %}" method="post">
+                {{ form }}
+                {% csrf_token %}
+                <input type="submit" value="Add to cart">
               </form>
             </div>
           </div>
