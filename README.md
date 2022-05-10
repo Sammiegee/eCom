@@ -17,3 +17,7 @@ Paginator was used to divide the data sent to the frontend pages into pages of 5
 The application includes authentication using a login form. 
 New users can register new accounts using the signup link on the login page.
 Behave was used to foster the Behavioural Driven Development procedure. 
+
+The application is deployed at ecom-samshop.herokuapp.com. I, however, observed that the product
+images do not load on Google chrome when accessed via the heroku link. This works quite fine on
+Safari.
