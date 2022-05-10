@@ -15,6 +15,7 @@ django.setup()
 
 # Use the chrome driver specific to your version of Chrome browser and put it in ./driver directory
 # CHROME_DRIVER = os.path.join(os.path.join(os.path.dirname(__file__), 'driver'), 'chromedriver')
+
 CHROME_DRIVER = os.path.join('driver/chromedriver')
 chrome_options = Options()
 # comment out the line below if you want to see the browser launch for tests

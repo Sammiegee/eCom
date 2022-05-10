@@ -83,15 +83,33 @@ def footwear(request):
 
 
 def jewellery(request):
-    return render(request, 'samshop/jewellery.html')
+    data = ProductDetails.objects.filter(main_category=239)
+
+    paginator = Paginator(data, 51)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'samshop/jewellery.html', {'page_obj': page_obj})
 
 
 def watches(request):
-    return render(request, 'samshop/watches.html')
+    data = ProductDetails.objects.filter(main_category=240)
+
+    paginator = Paginator(data, 51)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'samshop/watches.html', {'page_obj': page_obj})
 
 
 def bags(request):
-    return render(request, 'samshop/bags.html')
+    data = ProductDetails.objects.filter(main_category=236)
+
+    paginator = Paginator(data, 51)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'samshop/bags.html', {'page_obj': page_obj})
 
 
 
