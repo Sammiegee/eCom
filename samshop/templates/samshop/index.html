@@ -23,9 +23,16 @@
               {% if row.disc_price < row.retail_price %}
               <h6 class="text-muted ms-2"><del>£{{row.retail_price}}</del></h6>
               {% endif %}
-              <form method="post" action="" class="ms-3">
-                <input type="checkbox" name="" id="" onchange="submit"><label class="ms-2">Add to Basket</label>
+              <!--<form method="post" action="" class="d-flex mt-3 justify-content-center">
+                {% csrf_token %}
+                <label>Quantity</label><input class="me-2" type="number" name="quantity" style="width: 50px; height: 25px;" min="1">
+              </form>-->
+              <form action="{% url 'samshop:basket_add' row.id %}" method="post">
+                {{ form }}
+                {% csrf_token %}
+                <input type="submit" value="Add to cart">
               </form>
+
             </div>
           </div>
 

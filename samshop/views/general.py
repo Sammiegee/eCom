@@ -1,9 +1,19 @@
 from django.db.models import Q
-from samshop.forms import SignUpForm
-from django.shortcuts import render, redirect, get_object_or_404
+from samshop.views import Basket
+from samshop.forms import SignUpForm, BasketAddProductForm
 from django.core.paginator import Paginator
 from django.contrib.auth import login, authenticate
-from samshop.models import MainCategory, SubCategory, ProductDetails
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render, get_object_or_404
+from samshop.models import Basket, Customer, LineItem, Order, ProductDetails
+
+
+# from django.db.models import Q
+# from samshop.forms import SignUpForm
+# from django.shortcuts import render, redirect, get_object_or_404
+# from django.core.paginator import Paginator
+# from django.contrib.auth import login, authenticate
+# from samshop.models import MainCategory, SubCategory, ProductDetails
 
 
 # Create your views here.
@@ -38,8 +48,8 @@ def index(request):
     paginator = Paginator(data, 51)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    return render(request, 'samshop/index.html', {'page_obj': page_obj})
+    form = BasketAddProductForm()
+    return render(request, 'samshop/index.html', {'page_obj': page_obj, 'form': form})
 
 
 def search(request):
@@ -110,4 +120,57 @@ def bags(request):
 
 
 
+# def signup(request):
+#     # Reference - https://github.com/scharlau/shopping_exercise_django
+#
+#     form = SignUpForm(request.POST)
+#     if form.is_valid():
+#         user = form.save()
+#         user.refresh_from_db()
+#         user.customer.first_name = form.cleaned_data.get('first_name')
+#         user.customer.last_name = form.cleaned_data.get('last_name')
+#         user.customer.address = form.cleaned_data.get('address')
+#         user.save()
+#         username = form.cleaned_data.get('username')
+#         password = form.cleaned_data.get('password1')
+#         user = authenticate(username=username, password=password)
+#         login(request, user)
+#         return redirect('/')
+#     return render(request, 'signup.html', {'form': form})
 
+
+@login_required
+def dashboard(request):
+    user = request.user
+    if user.is_authenticated & user.is_staff:
+        return render(request, 'shop/dashboard.html')
+    else:
+        return redirect('/accounts/login.html')
+
+
+# save order, clear basket and thank customer
+def payment(request):
+    basket = Basket(request)
+    user = request.user
+    customer = get_object_or_404(Customer, user_id=user.id)
+    order = Order.objects.create(customer=customer)
+    order.refresh_from_db()
+    for item in basket:
+        product_item = get_object_or_404(ProductDetails, id=item['product_id'])
+        cart = Basket.objects.create(product=product_item, quantity=item['quantity'])
+        cart.refresh_from_db()
+        line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart, order=order)
+
+    basket.clear()
+    request.session['deleted'] = 'thanks for your purchase'
+    return redirect('samshop:product_list')
+
+
+def purchase(request):
+    if request.user.is_authenticated:
+        user = request.user
+        basket = Basket(request)
+
+        return render(request, 'samshop/purchase.html', {'basket': basket, 'user': user})
+    else:
+        return redirect('login')

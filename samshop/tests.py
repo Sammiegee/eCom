@@ -58,13 +58,13 @@ class SamshopCategoryTests(TestCase):
         self.assertTemplateUsed(response, 'samshop/bags.html')
 
 
-class SearchTests(TestCase):
-
-    def search_test(self):
-        client = Client()
-        response = client.get('/index')
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "About Air Pollution")
-        self.assertContains(response, "Related links")
-        self.assertTemplateUsed(response, 'samshop/index.html')
+# class SearchTests(TestCase):
+#
+#     def search_test(self):
+#         client = Client()
+#         response = client.get('/index')
+#         self.assertEqual(response.status_code, 200)
+#         self.assertContains(response, "About Air Pollution")
+#         self.assertContains(response, "Related links")
+#         self.assertTemplateUsed(response, 'samshop/index.html')
 

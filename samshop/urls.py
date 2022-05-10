@@ -14,4 +14,7 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('search', views.search, name='search'),
     path('signup', views.signup, name='signup'),
+    path('add/<int:product_id>', views.basket_add, name='basket_add'),
+    path('remove/<int:product_id>', views.basket_remove, name='basket_remove'),
+    path('basket', views.basket_detail, name='basket_detail'),
 ]
